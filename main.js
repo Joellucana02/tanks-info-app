@@ -1,7 +1,7 @@
 const d = document;
 let $main = d.querySelector('.main-container'),
     $tank = d.querySelector('.tank'),
-    $btn = d.querySelector('.tank-btn'),
+    /* $btn = d.querySelector('.tank-btn'), */
     $tankName = d.querySelector('.tank-name'),
     $fragment = d.createDocumentFragment();
 let myApi = 'https://tanksapirunningjs.herokuapp.com/finally';
@@ -19,6 +19,7 @@ let requestData = async (link) => {
         let getData = await getResponse.data;
         console.log(getData);
         displayTanks(getData);
+        addClasses();
     } catch (error) {
         console.log(error)
     } finally {
@@ -26,12 +27,9 @@ let requestData = async (link) => {
     }
 }
 let displayTanks = (api) => {
-    //console.log(api.results.length);
+
     let results = api.results;
     results.forEach(element => {
-        //console.log(element.nametank);
-        //$tankName.textContent = element.nametank;
-
         $tankName.textContent = element.nametank;
         $tankName.classList.add('tank-info-btn');
         $tank.appendChild($tankName);
@@ -41,24 +39,16 @@ let displayTanks = (api) => {
     $main.appendChild($fragment);
 }
 d.addEventListener('DOMContentLoaded', requestData);
-/* $tankName = d.querySelectorAll('.tank-name'); */
-$tankName.addEventListener('click', (e) => {
-    if (e.target.matches('.tank-name')) {
-        console.log($tankName)
-        /* let $infoContainer = d.createElement('div');
-        $infoContainer.classList.add('tank-info-container'); */
-        /* console.log($infoContainer); */
+let addClasses = () => {
+    let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
 
-        console.log('Its working');
-    } else {
+    console.log(typeof ($tankInfoBtn))
+    let $tankInfoArr = Array.from($tankInfoBtn);
+    console.log($tankInfoArr.length);
 
-        console.log('................................')
-    }
-    /* let $tankBtn = d.querySelector('.tank-info-btn');
-    console.log($tankBtn) */
-
-    /* let $divRandom = d.createElement('div');
-    $divRandom.classList.add('tank-info-container'); */
-
-
-})
+    $tankInfoArr.forEach(element => {
+        element.addEventListner('click', () => {
+            console.log('someone hit me');
+        });
+    });
+}
