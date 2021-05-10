@@ -19,7 +19,9 @@ let requestData = async (link) => {
         let getData = await getResponse.data;
         console.log(getData);
         displayTanks(getData);
+
         addClasses();
+
     } catch (error) {
         console.log(error)
     } finally {
@@ -30,15 +32,18 @@ let displayTanks = (api) => {
 
     let results = api.results;
     results.forEach(element => {
-        $tankName.textContent = element.nametank;
         $tankName.classList.add('tank-info-btn');
+        $tankName.textContent = element.nametank;
         $tank.appendChild($tankName);
         let $clone = d.importNode($tank, true);
         $fragment.appendChild($clone);
     })
     $main.appendChild($fragment);
+    let $tankNames = d.querySelectorAll('.tank-name');
+    console.log($tankNames);
 }
 d.addEventListener('DOMContentLoaded', requestData);
+
 let addClasses = () => {
     let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
 
@@ -51,4 +56,5 @@ let addClasses = () => {
             console.log('someone hit me');
         });
     });
+
 }

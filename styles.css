@@ -18,47 +18,7 @@ body{
     /* position: absolute; */
     
 }
-/* .tank-container{
-    width: 1200px;
-    height: 30rem;
-    margin-top: 5rem;
-    
-   
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-}
-.tank-container .tank{
-    height: 25rem;
-    width: 33%;
 
-    background: #aaa;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  
-}
-.tank-container .tank img{
-    height: 10rem;
-    width: 15rem;
-    margin: auto;
-}
-.tank-container .tank .btn-pointer{
-    color: #000;
-    font-weight: 500;
-    font-size: 1.7rem;
-    background: #FF9F1C;
-    margin-bottom: 2rem;
-    padding: 1rem .5rem;
-    border-radius: .5rem;
-}
-.tank-container .tank:hover{
-    background: #ccc;
-}
-.tank-container .tank .btn-pointer:hover{
-    color: #fff;
-} */
 .main .text-top{
     color: #fff;
     font-weight: 500;
