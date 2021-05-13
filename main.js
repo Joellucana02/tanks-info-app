@@ -18,7 +18,7 @@ let requestData = async (link) => {
         let getResponse = await axios.get(myApi, head);
         let getData = await getResponse.data;
         console.log(getData);
-        displayTanks(getData);
+        displayTanks(getData, $tankNameContainer);
 
         addClasses();
 
@@ -28,30 +28,34 @@ let requestData = async (link) => {
         console.log('Its good to be alive')
     }
 }
-let displayTanks = (api) => {
+let $tankNameContainer = d.createElement('div');
+let displayTanks = (api, tnc) => {
 
     let results = api.results;
     results.forEach(element => {
+        tnc.classList.add('tank-name-container');
         $tankName.classList.add('tank-info-btn');
         $tankName.textContent = element.nametank;
-        $tank.appendChild($tankName);
+        tnc.appendChild($tankName);
+        $tank.appendChild(tnc);
         let $clone = d.importNode($tank, true);
         $fragment.appendChild($clone);
+        //console.log($tankNameContainer)
     })
     $main.appendChild($fragment);
-    let $tankNames = d.querySelectorAll('.tank-name');
-    console.log($tankNames);
 }
 d.addEventListener('DOMContentLoaded', requestData);
 
-let addClasses = () => {
-    let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
+let addClasses = (e) => {
+    let $tankNameContainerAll = d.querySelectorAll('.tank-name-container');
+    console.log($tankNameContainerAll);
+    //let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
 
-    console.log(typeof ($tankInfoBtn))
-    let $tankInfoArr = Array.from($tankInfoBtn);
-    console.log($tankInfoArr.length);
+    /* console.log(typeof ($tankInfoBtn)) */
+    let $tankNameContainerArr = Array.from($tankNameContainerAll);
+    console.log($tankNameContainerArr.length);
 
-    $tankInfoArr.forEach(element => {
+    $tankNameContainerArr.forEach(element => {
         element.addEventListner('click', () => {
             console.log('someone hit me');
         });
