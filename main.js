@@ -54,11 +54,16 @@ let addClasses = (e) => {
     /* console.log(typeof ($tankInfoBtn)) */
     let $tankNameContainerArr = Array.from($tankNameContainerAll);
     console.log($tankNameContainerArr.length);
-
-    $tankNameContainerArr.forEach(element => {
+    for (var i = 0; i < $tankNameContainerArr.length; i++) {
+        $tankNameContainerArr[i].addEventListener("click", () => {
+            //li[i].classList.toggle("done");
+            console.log('someone hit me');
+        })
+    }
+    /* $tankNameContainerArr.forEach(element => {
         element.addEventListner('click', () => {
             console.log('someone hit me');
         });
-    });
+    }); */
 
 }
