@@ -15,8 +15,8 @@ let head = {
 }
 let requestData = async (link) => {
     try {
-        let getResponse = await axios.get(myApi, head);
-        let getData = await getResponse.data;
+        let getResponse = await axios.get(myApi, head),
+            getData = await getResponse.data;
         console.log(getData);
         displayTanks(getData, $tankNameContainer);
 
@@ -28,7 +28,11 @@ let requestData = async (link) => {
         console.log('Its good to be alive')
     }
 }
-let $tankNameContainer = d.createElement('div');
+let $popUpTankInfo = d.querySelector('.tank-info-popup'),
+    $popUpTankInfoOverlay = d.querySelector('.overlay'),
+    $popUpClose = d.querySelector('.close-btn'),
+    $tankNameContainer = d.createElement('div');
+
 let displayTanks = (api, tnc) => {
 
     let results = api.results;
@@ -46,7 +50,7 @@ let displayTanks = (api, tnc) => {
 }
 d.addEventListener('DOMContentLoaded', requestData);
 
-let addClasses = (e) => {
+let addClasses = () => {
     let $tankNameContainerAll = d.querySelectorAll('.tank-name-container');
     console.log($tankNameContainerAll);
     //let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
@@ -54,16 +58,56 @@ let addClasses = (e) => {
     /* console.log(typeof ($tankInfoBtn)) */
     let $tankNameContainerArr = Array.from($tankNameContainerAll);
     console.log($tankNameContainerArr.length);
-    for (var i = 0; i < $tankNameContainerArr.length; i++) {
+    for (let i = 0; i < $tankNameContainerArr.length; i++) {
         $tankNameContainerArr[i].addEventListener("click", () => {
             //li[i].classList.toggle("done");
+            console.log($tankNameContainerArr[i].textContent)
             console.log('someone hit me');
+            openModal($tankNameContainerArr[i].textContent);
+            closeModal();
         })
     }
+
     /* $tankNameContainerArr.forEach(element => {
         element.addEventListner('click', () => {
             console.log('someone hit me');
         });
     }); */
 
+}
+let openModal = (textVer) => {
+    $popUpTankInfo.classList.add('tank-info-popup--active');
+    $popUpTankInfoOverlay.classList.add('overlay--active');
+    myData(myApi, head, textVer)
+
+}
+let closeModal = () => {
+    $popUpClose.addEventListener('click', () => {
+        $popUpTankInfo.classList.remove('tank-info-popup--active');
+        $popUpTankInfoOverlay.classList.remove('overlay--active');
+    })
+
+}
+let myData = async (myApi, head, tv) => {
+    try {
+        let getResponse = await axios.get(myApi, head),
+            getData = await getResponse.data;
+        console.log(getData);
+        let $infoPopup = d.querySelector('.tank-info-popup');
+        console.log($infoPopup)
+        for (let i = 0; i < getData.results.length; i++) {
+            if (tv == getData.results[i].nametank) {
+
+                $infoPopup.querySelector('.left__name').textContent = getData.results[i].nametank ? getData.results[i].nametank : '???.';
+                $infoPopup.querySelector('.left__country').textContent = getData.results[i].country ? getData.results[i].country : '???.';
+                $infoPopup.querySelector('.right__type').textContent = getData.results[i].typetank ? getData.results[i].typetank : '???.';
+                $infoPopup.querySelector('.right__manufacturer').textContent = getData.results[i].manufacturer ? getData.results[i].manufacturer : '???.';
+            }
+
+        }
+    } catch (error) {
+        console.log(error)
+    } finally {
+        console.log('... ... ...')
+    }
 }

@@ -11,12 +11,8 @@ body{
     background: #011627;
 }
 .main{
-    /* height: 100vh; */
     width: 1200px;
-    /* background: #315659; */
-    margin: 0 auto;
-    /* position: absolute; */
-    
+    margin: 0 auto;    
 }
 
 .main .text-top{
@@ -24,8 +20,7 @@ body{
     font-weight: 500;
     font-size: 2.5rem;
     text-align: center;
-    margin-top: 5rem;
-    
+    margin-top: 5rem;    
 }
 /* ============================================================= */
 .main-container{
@@ -36,6 +31,7 @@ body{
     background: #aaa;
     justify-content: space-evenly;
     align-items: center;
+    position: relative;
 }
 .main-container .tank{
     width: 300px;
@@ -44,7 +40,6 @@ body{
     margin-bottom: 1rem;
     text-align: center;
     position: relative;
-
 }
 .main-container .tank .tank-name{
     background: cornflowerblue; 
@@ -57,5 +52,42 @@ body{
     height: 70%;
     margin: 2rem auto;
     background: #011627;
-    /* margin-bottom: 2rem; */
+}
+/* ============================================ */
+.main-container .tank-info-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%) scale(0);
+    transition: 200ms ease-in-out;
+    border-radius: 1rem;
+    width: 100vh;
+    height: 80vh;
+    background: #777;
+    z-index: 50;
+}
+.main-container .tank-info-popup .close-btn{
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.5rem;
+}
+.main-container .tank-info-popup--active{
+    transform: translate(-50%,-50%) scale(1);
+}
+.main-container .overlay{
+    position: fixed;
+    opacity: 0;
+    transition: 200ms ease-in-out;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left:0;
+    background: rgba(0,0,0,.5);
+    pointer-events: none;
+}
+.main-container .overlay--active{
+    pointer-events: all;
+    opacity: 1;
 }
