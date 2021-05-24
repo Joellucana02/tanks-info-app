@@ -1,7 +1,7 @@
 const d = document;
 let $main = d.querySelector('.main-container'),
     $tank = d.querySelector('.tank'),
-    /* $btn = d.querySelector('.tank-btn'), */
+
     $tankName = d.querySelector('.tank-name'),
     $fragment = d.createDocumentFragment();
 let myApi = 'https://tanksapirunningjs.herokuapp.com/finally';
@@ -44,7 +44,7 @@ let displayTanks = (api, tnc) => {
         $tank.appendChild(tnc);
         let $clone = d.importNode($tank, true);
         $fragment.appendChild($clone);
-        //console.log($tankNameContainer)
+
     })
     $main.appendChild($fragment);
 }
@@ -53,26 +53,18 @@ d.addEventListener('DOMContentLoaded', requestData);
 let addClasses = () => {
     let $tankNameContainerAll = d.querySelectorAll('.tank-name-container');
     console.log($tankNameContainerAll);
-    //let $tankInfoBtn = d.querySelectorAll('.tank-info-btn');
 
-    /* console.log(typeof ($tankInfoBtn)) */
     let $tankNameContainerArr = Array.from($tankNameContainerAll);
     console.log($tankNameContainerArr.length);
     for (let i = 0; i < $tankNameContainerArr.length; i++) {
         $tankNameContainerArr[i].addEventListener("click", () => {
-            //li[i].classList.toggle("done");
+
             console.log($tankNameContainerArr[i].textContent)
             console.log('someone hit me');
             openModal($tankNameContainerArr[i].textContent);
             closeModal();
         })
     }
-
-    /* $tankNameContainerArr.forEach(element => {
-        element.addEventListner('click', () => {
-            console.log('someone hit me');
-        });
-    }); */
 
 }
 let openModal = (textVer) => {
